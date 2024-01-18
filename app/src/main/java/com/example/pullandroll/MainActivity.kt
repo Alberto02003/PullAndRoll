@@ -39,11 +39,14 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     var viewModelFirebase : ViewModelFirebase = viewModel()
-                    val listaGrifa = viewModelFirebase.listaGrifa.collectAsState().value
-
+                    val camisetaNegra = viewModelFirebase.camiseta_negra.collectAsState().value
+                    DisposableEffect(key1 = viewModelFirebase){
+                        viewModelFirebase.crearListener()
+                        onDispose { viewModelFirebase.BorrarListener()}
+                    }
 
                     LazyColumn() {
-                        items(listaGrifa){
+                        items(camisetaNegra){
                             Text(it.toString())
                         }
                     }

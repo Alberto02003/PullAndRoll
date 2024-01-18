@@ -18,8 +18,8 @@ class ViewModelFirebase: ViewModel(){
     val cn = FirebaseFirestore.getInstance()
     private lateinit var listenerReg : ListenerRegistration
 
-    private var _listaGrifa = MutableStateFlow(mutableStateListOf<Camiseta_Negra>())
-    var listaGrifa = _listaGrifa.asStateFlow()
+    private var _Camiseta_Negra = MutableStateFlow(mutableStateListOf<Camiseta_Negra>())
+    var camiseta_negra = _Camiseta_Negra.asStateFlow()
 
     fun crearListener(){
         cn.collection("Camiseta_Negra").addSnapshotListener{
@@ -27,16 +27,16 @@ class ViewModelFirebase: ViewModel(){
             if (error == null){
                 datos?.documentChanges?.forEach { cambio ->
                  if (cambio.type == DocumentChange.Type.ADDED){
-                     var nuevaGrifa = cambio.document.toObject<Camiseta_Negra>()
-                     _listaGrifa.value.add(nuevaGrifa)
+                     var nuevaGcamiseta = cambio.document.toObject<Camiseta_Negra>()
+                     _Camiseta_Negra.value.add(nuevaGcamiseta)
                  }
                  else if (cambio.type == DocumentChange.Type.REMOVED){
-                     var nuevaGrifa = cambio.document.toObject<Camiseta_Negra>()
-                     _listaGrifa.value.remove(nuevaGrifa)
+                     var nuevaGcamiseta = cambio.document.toObject<Camiseta_Negra>()
+                     _Camiseta_Negra.value.remove(nuevaGcamiseta)
                  }
                  else if (cambio.type == DocumentChange.Type.MODIFIED){
-                     var nuevaGrifa = cambio.document.toObject<Camiseta_Negra>()
-                     _listaGrifa.value[cambio.newIndex] = nuevaGrifa
+                     var nuevaGcamiseta = cambio.document.toObject<Camiseta_Negra>()
+                     _Camiseta_Negra.value[cambio.newIndex] = nuevaGcamiseta
                  }
                 }
             }
