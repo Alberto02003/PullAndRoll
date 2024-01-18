@@ -39,7 +39,9 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     var viewModelFirebase : ViewModelFirebase = viewModel()
+
                     val camisetaNegra = viewModelFirebase.camiseta_negra.collectAsState().value
+
                     DisposableEffect(key1 = viewModelFirebase){
                         viewModelFirebase.crearListener()
                         onDispose { viewModelFirebase.BorrarListener()}
