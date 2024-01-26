@@ -24,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.viewModelFactory
+import com.example.pullandroll.Navegacion.GrafoNavegacion
 import com.example.pullandroll.ui.theme.PullAndRollTheme
 import com.example.pullandroll.viewmodel.ViewModelFirebase
 
@@ -47,16 +48,17 @@ class MainActivity : ComponentActivity() {
                         onDispose { viewModelFirebase.BorrarListener()}
                     }
 
-                    LazyColumn() {
-                        items(camisetaNegra){
-                            Text(it.toString())
-                        }
-                    }
-                    Row(verticalAlignment = Alignment.Bottom) {
-                       FloatingActionButton( modifier = Modifier.padding(20.dp), onClick = { /*TODO*/ }) {
-                           Text(text = "Agregar")
-                       }
-                    }
+//                    LazyColumn() {
+//                        items(camisetaNegra){
+//                            Text(it.toString())
+//                        }
+//                    }
+//                    Row(verticalAlignment = Alignment.Bottom) {
+//                       FloatingActionButton( modifier = Modifier.padding(20.dp), onClick = { /*TODO*/ }) {
+//                           Text(text = "Agregar")
+//                       }
+//                    }
+                    GrafoNavegacion()
                 }
             }
         }
