@@ -9,21 +9,38 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.modifier.modifierLocalMapOf
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.media3.common.MediaItem
@@ -36,9 +53,10 @@ import androidx.media3.ui.PlayerView
 import androidx.navigation.NavController
 import com.example.pullandroll.R
 
+@kotlin.OptIn(ExperimentalMaterial3Api::class)
 @OptIn(UnstableApi::class)
 @Composable
-fun inicio(navController: NavController){
+fun inicio(navController: NavController) {
     val context = LocalContext.current
     val exoPlayer = remember {
         ExoPlayer.Builder(context).build()
@@ -47,14 +65,70 @@ fun inicio(navController: NavController){
     exoPlayer.playWhenReady = true
     exoPlayer.repeatMode = ExoPlayer.REPEAT_MODE_ALL
 
-    val uri  = RawResourceDataSource.buildRawResourceUri(R.raw.fondo)
+    val uri = RawResourceDataSource.buildRawResourceUri(R.raw.fondo)
     val mediaItem = remember {
-            MediaItem.Builder()
+        MediaItem.Builder()
             .setUri(uri)
             .build()
     }
     exoPlayer.setMediaItem(mediaItem)
     exoPlayer.prepare()
+
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+
+    Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+
+        topBar = {
+            CenterAlignedTopAppBar(
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    titleContentColor = MaterialTheme.colorScheme.primary,
+                ),
+                title = {
+                    Text(
+                        "Centered Top App Bar",
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                },
+                navigationIcon = {
+                    IconButton(onClick = { /* do something */ }) {
+                        Icon(
+                            imageVector = Icons.Filled.ArrowBack,
+                            contentDescription = "Localized description"
+                        )
+                    }
+                },
+                actions = {
+                    IconButton(onClick = { /* do something */ }) {
+                        Icon(
+                            imageVector = Icons.Filled.Menu,
+                            contentDescription = "Localized description"
+                        )
+                    }
+                },
+                scrollBehavior = scrollBehavior,
+            )
+        },
+    )
+    { paddingValues ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(bottom = paddingValues.calculateBottomPadding())
+                .verticalScroll(rememberScrollState())
+        ) {
+
+            Text("Bottom app bar padding:  $paddingValues")
+
+            repeat(50) {
+                Text(it.toString())
+            }
+        }
+        //innerPadding ->
+        //ScrollContent(innerPadding)
+    }
 
     Box(modifier = Modifier.fillMaxSize()) {
         AndroidView(factory = {
@@ -65,40 +139,60 @@ fun inicio(navController: NavController){
             }
         })
 
-        LazyVerticalGrid( columns = GridCells.Adaptive(minSize = 128.dp)){
+        LazyVerticalGrid(columns = GridCells.Adaptive(minSize = 128.dp)) {
 
         }
+        Column() {
+            Row() {
+                Column(
+                    modifier = Modifier
+                        .width(180.dp)
+                        .height(530.dp)
+                        .border(2.dp, Color.Red),
+                    verticalArrangement = Arrangement.Top,
+                    horizontalAlignment = Alignment.Start
+                ) {
+                    Button(
+                        modifier = Modifier
+                            .fillMaxSize()
+                        , colors = ButtonDefaults.buttonColors(contentColor = Color.Red, containerColor = Color.Transparent)
+                        , onClick = { /*TODO*/ }
+                    ) {
+                        Text(text = "ROPA FEMENINA")
+                    }
+                }
+                Column(
+                    modifier = Modifier
+                        .width(180.dp)
+                        .height(530.dp)
+                        .border(2.dp, Color.Red),
+                    horizontalAlignment = Alignment.End
+                ) {
+                    Button(
+                        modifier = Modifier
+                            .fillMaxSize()
+                        , colors = ButtonDefaults.buttonColors(contentColor = Color.Red, containerColor = Color.Transparent)
+                        , onClick = { /*TODO*/ }
+                    ) {
+                        Text(text = "ROPA MASCULINA")
+                    }
+                }
+            }
 
-
-
-//        Column(
-//            modifier = Modifier
-//                .width(180.dp)
-//                .height(420.dp)
-//                .border(2.dp, Color.Red),
-//            verticalArrangement = Arrangement.Top,
-//            horizontalAlignment = Alignment.Start
-//        ) {
-//                Button(modifier = Modifier.fillMaxSize(),colors = ButtonDefaults.buttonColors(
-//                    contentColor = Color.Red
-//                ),onClick = { /*TODO*/ }) {
-//                    Text(text = "SIGN IN")
-//                }
-//        }
-//        Column(
-//            modifier = Modifier
-//                .width(180.dp)
-//                .height(420.dp)
-//                .border(2.dp, Color.Red),
-//            horizontalAlignment = Alignment.End
-//        ) {
-//            Button(modifier = Modifier.fillMaxSize(),colors = ButtonDefaults.buttonColors(
-//                contentColor = Color.Red
-//            ),onClick = { /*TODO*/ }) {
-//                Text(text = "SIGN IN")
-//            }
-//        }
-
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .border(2.dp, Color.Red)
+            ) {
+                Button(
+                    modifier = Modifier
+                        .fillMaxSize()
+                    , colors = ButtonDefaults.buttonColors(contentColor = Color.Red, containerColor = Color.Transparent)
+                    , onClick = { /*TODO*/ }
+                ) {
+                    Text(text = "ACCESORIOS")
+                }
+            }
+        }
     }
-
 }
