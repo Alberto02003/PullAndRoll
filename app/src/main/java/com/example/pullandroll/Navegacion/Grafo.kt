@@ -10,6 +10,7 @@ import com.example.pullandroll.pantallas.Accesorios
 import com.example.pullandroll.pantallas.Carrito
 import com.example.pullandroll.pantallas.Cuenta
 import com.example.pullandroll.pantallas.Inicio
+import com.example.pullandroll.pantallas.Perfil
 import com.example.pullandroll.pantallas.Registro
 import com.example.pullandroll.pantallas.RopaHombre
 import com.example.pullandroll.pantallas.RopaMujer
@@ -45,6 +46,9 @@ fun GrafoNavegacion(){
         }
         composable(Rutas.SobreNosotros.ruta){
             SobreNosotros(navController = navController)
+        }
+        composable(Rutas.Perfil.ruta){
+            Perfil(navController = navController)
         }
 
 

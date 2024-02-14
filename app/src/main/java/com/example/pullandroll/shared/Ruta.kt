@@ -9,4 +9,5 @@ sealed class Rutas(val ruta: String){
     object RopaHombre : Rutas("RopaHombre")
     object RopaMujer : Rutas("RopaMujer")
     object SobreNosotros : Rutas("SobreNosotros")
+    object Perfil : Rutas("Perfil")
 }
