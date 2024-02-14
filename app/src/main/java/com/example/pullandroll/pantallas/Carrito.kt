@@ -1,3 +1,4 @@
+/*
 package com.example.pullandroll.pantallas
 
 import android.annotation.SuppressLint
@@ -42,7 +43,9 @@ fun Carrito(navController: NavController, productos: List<Producto>, onBuyClicke
             CenterAlignedTopAppBar(
                 title = { Text("Carrito de Compra") },
                 actions = {
-                    IconButton(onClick = { /* acción al hacer clic */ }) {
+                    IconButton(onClick = { */
+/* acción al hacer clic *//*
+ }) {
                         Icon(Icons.Filled.ShoppingCart, contentDescription = "Carrito de compra")
                     }
                 }
@@ -103,4 +106,4 @@ fun ProductoItem(producto: Producto) {
             modifier = Modifier.padding(end = 16.dp)
         )
     }
-}
+}*/

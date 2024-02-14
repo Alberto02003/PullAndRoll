@@ -14,7 +14,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -28,6 +30,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.material3.rememberTopAppBarState
@@ -48,7 +51,7 @@ import androidx.media3.datasource.RawResourceDataSource
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.navigation.NavController
 import com.example.pullandroll.R
-
+import com.example.pullandroll.objetos.Producto
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -56,55 +59,48 @@ import com.example.pullandroll.R
 @Composable
 fun Productos(navController: NavController) {
 
+   /* val productos = listOf(
+        Producto("Camiseta", R.drawable.tshirt, 1, 20.0),
+        Producto("Pantalón", R.drawable.skirt, 2, 35.0),
+        Producto("Bufanda", R.drawable.earrings, 3, 15.0),
+    )
+    Carrito(navController = navController, productos = productos, onBuyClicked = {
+        // Acción al hacer clic en el botón de comprar
+    })*/
     var isDrawerOpen by remember { mutableStateOf(false) }
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
     val categories = listOf("Category 1", "Category 2", "Category 3", "Category 4", "Category 5")
 
     Scaffold(
-        modifier = Modifier
-            .fillMaxSize()
-            .nestedScroll(scrollBehavior.nestedScrollConnection),
+        modifier = Modifier.fillMaxSize(),
         topBar = {
-            CenterAlignedTopAppBar(
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.primary,
-                ),
-                title = {
-                    Text(
-                        "NOT P&B",
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                },
+            TopAppBar(
+                title = { Text("NOT P&B") },
                 navigationIcon = {
                     IconButton(onClick = {
                         isDrawerOpen = true
                     }) {
-                        Icon(
-                            imageVector = Icons.Filled.Menu,
-                            contentDescription = "Menu hamburguesa"
-                        )
+                        Icon(Icons.Filled.Menu, contentDescription = "Menu")
                     }
-                },
+                }
             )
-
-        }, content = {
-            LazyColumn(
-                modifier = Modifier.fillMaxSize()
-                    .padding(top = 80.dp)
-            ) {
-                items(categories.size) { index ->
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 16.dp)
-                    ) {
-                        Text(
-                            text = categories[index],
-                            modifier = Modifier.padding(start = 16.dp),
-                        )
-                        HorizontalScrollBox()
+        },
+        content = {
+            Box(modifier = Modifier.fillMaxSize()) {
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    items(categories) { category ->
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 16.dp)
+                        ) {
+                            Text(
+                                text = category,
+                                modifier = Modifier.padding(start = 16.dp)
+                            )
+                            HorizontalScrollBox()
+                        }
                     }
                 }
             }
@@ -112,6 +108,7 @@ fun Productos(navController: NavController) {
     )
 
 }
+
 
 
 @Composable
