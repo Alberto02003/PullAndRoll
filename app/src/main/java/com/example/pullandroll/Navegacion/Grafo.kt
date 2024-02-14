@@ -6,7 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.pullandroll.Rutas.Rutas
-/*import com.example.pullandroll.pantallas.Carrito*/
+import com.example.pullandroll.pantallas.Carrito
 import com.example.pullandroll.pantallas.Cuenta
 import com.example.pullandroll.pantallas.Inicio
 import com.example.pullandroll.pantallas.Perfil

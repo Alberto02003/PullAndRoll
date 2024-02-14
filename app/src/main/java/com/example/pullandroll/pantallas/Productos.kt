@@ -57,7 +57,7 @@ fun Productos(navController: NavController) {
             TopAppBar(
                 title = { Text("NOT P&B") },
                 navigationIcon = {
-                    IconButton(onClick = { navController.navigate("C")}) {
+                    IconButton(onClick = { navController.navigate("Carrito")}) {
                         Icon(Icons.Filled.ShoppingCart, contentDescription = "Carrito")
                     }
                 },
@@ -70,9 +70,9 @@ fun Productos(navController: NavController) {
             )
         },
         content = {
-            Surface( // Agrega un Surface como contenedor principal
-                color = Color.Black, // Establece el color de fondo del Surface a negro
-                modifier = Modifier.fillMaxSize() // Asegúrate de que el Surface ocupe todo el espacio disponible
+            Surface(
+                color = Color.Black,
+                modifier = Modifier.fillMaxSize()
             ) {
                 Box(modifier = Modifier.fillMaxSize()) {
                     if (isDrawerOpen) {

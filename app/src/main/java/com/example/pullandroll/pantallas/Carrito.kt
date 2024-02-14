@@ -2,28 +2,12 @@ package com.example.pullandroll.pantallas
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ShoppingCart
-import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,10 +17,17 @@ import androidx.navigation.NavController
 import com.example.pullandroll.R
 import com.example.pullandroll.objetos.Producto
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun Carrito(navController: NavController, productos: List<Producto>, onBuyClicked: () -> Unit) {
+fun Carrito(navController: NavController) {
+    // Lista de productos
+    val productos = listOf(
+        Producto("Camiseta", R.drawable.tshirt, 1, 20.0),
+        Producto("Pantalón", R.drawable.skirt, 2, 35.0),
+        Producto("Bufanda", R.drawable.earrings, 3, 15.0),
+    )
+
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -61,7 +52,7 @@ fun Carrito(navController: NavController, productos: List<Producto>, onBuyClicke
             }
 
             Button(
-                onClick = onBuyClicked,
+                onClick = { /* acción al hacer clic */ },
                 modifier = Modifier
                     .padding(vertical = 16.dp, horizontal = 8.dp)
                     .fillMaxWidth(),

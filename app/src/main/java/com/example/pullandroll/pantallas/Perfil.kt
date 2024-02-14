@@ -22,9 +22,9 @@ import com.example.pullandroll.R
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Perfil(navController: NavController) {
     Column(
@@ -49,7 +49,7 @@ fun Perfil(navController: NavController) {
 @Composable
 fun ProfileImage() {
     Image(
-        painter = painterResource(id = R.drawable.ic_launcher_background),
+        painter = painterResource(id = R.drawable.fotoperfil),
         contentDescription = "Profile Picture",
         modifier = Modifier
             .size(150.dp)
@@ -66,7 +66,7 @@ fun ProfileInfo(name: String, correo: String, contraseña: String) {
         text = name,
         fontSize = 24.sp,
         fontWeight = FontWeight.Bold,
-        color = Color.Black
+        color = Color.White
     )
     Spacer(modifier = Modifier.height(4.dp))
     Text(
@@ -85,6 +85,6 @@ fun ProfileInfo(name: String, correo: String, contraseña: String) {
 @Composable
 fun ChangePasswordButton(onClick: () -> Unit) {
     Button(onClick = onClick) {
-        Text(text = "Change Password")
+        Text(text = "Cambiar Contraseña")
     }
 }
