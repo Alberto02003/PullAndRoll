@@ -8,6 +8,6 @@ import androidx.navigation.NavController
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RopaHombre(navController: NavController) {
+fun Productos(navController: NavController) {
 
 }

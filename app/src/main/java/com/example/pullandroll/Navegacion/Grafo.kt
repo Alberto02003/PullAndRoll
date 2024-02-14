@@ -6,14 +6,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.pullandroll.Rutas.Rutas
-import com.example.pullandroll.pantallas.Accesorios
 import com.example.pullandroll.pantallas.Carrito
 import com.example.pullandroll.pantallas.Cuenta
 import com.example.pullandroll.pantallas.Inicio
 import com.example.pullandroll.pantallas.Perfil
+import com.example.pullandroll.pantallas.Productos
 import com.example.pullandroll.pantallas.Registro
-import com.example.pullandroll.pantallas.RopaHombre
-import com.example.pullandroll.pantallas.RopaMujer
 import com.example.pullandroll.pantallas.SobreNosotros
 
 
@@ -32,14 +30,8 @@ fun GrafoNavegacion(){
         composable(Rutas.Carrito.ruta){
             Carrito(navController = navController)
         }
-        composable(Rutas.RopaHombre.ruta){
-            RopaHombre(navController = navController)
-        }
-        composable(Rutas.RopaMujer.ruta){
-            RopaMujer(navController = navController)
-        }
-        composable(Rutas.Accesorios.ruta){
-            Accesorios(navController = navController)
+        composable(Rutas.Productos.ruta){
+            Productos(navController = navController)
         }
         composable(Rutas.Registro.ruta){
             Registro(navController = navController)

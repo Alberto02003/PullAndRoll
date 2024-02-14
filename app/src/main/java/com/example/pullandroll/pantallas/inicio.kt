@@ -136,23 +136,8 @@ fun Inicio(navController: NavController) {
             LazyVerticalGrid(columns = GridCells.Adaptive(minSize = 128.dp)) {
 
             }
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .border(2.dp, Color.Red)
-            ) {
-                Button(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    colors = ButtonDefaults.buttonColors(
-                        contentColor = Color.Red,
-                        containerColor = Color.Transparent
-                    ),
-                    onClick = { navController.navigate("Ropa") }
-                ) {
-                    Text(text = "EMPEZAR")
-                }
-                /*Row() {
+            Column() {
+                Row() {
                     Column(
                         modifier = Modifier
                             .width(180.dp)
@@ -210,7 +195,7 @@ fun Inicio(navController: NavController) {
                     ) {
                         Text(text = "ACCESORIOS")
                     }
-                }*/
+                }
             }
         }
     }
