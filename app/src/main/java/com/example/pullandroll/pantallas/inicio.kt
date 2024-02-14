@@ -142,7 +142,7 @@ fun Inicio(navController: NavController) {
                         modifier = Modifier
                             .width(180.dp)
                             .height(530.dp)
-                            .border(2.dp, Color.Red),
+                            .border(1.dp, Color.White),
                         verticalArrangement = Arrangement.Top,
                         horizontalAlignment = Alignment.Start
                     ) {
@@ -150,10 +150,10 @@ fun Inicio(navController: NavController) {
                             modifier = Modifier
                                 .fillMaxSize(),
                             colors = ButtonDefaults.buttonColors(
-                                contentColor = Color.Red,
-                                containerColor = Color.Transparent
+                                containerColor = Color.Transparent,
+                                contentColor = Color.White
                             ),
-                            onClick = { navController.navigate("RopaMujer") }
+                            onClick = { navController.navigate("Productos") }
                         ) {
                             Text(text = "ROPA FEMENINA")
                         }
@@ -162,17 +162,17 @@ fun Inicio(navController: NavController) {
                         modifier = Modifier
                             .width(180.dp)
                             .height(530.dp)
-                            .border(2.dp, Color.Red),
+                            .border(1.dp, Color.White),
                         horizontalAlignment = Alignment.End
                     ) {
                         Button(
                             modifier = Modifier
                                 .fillMaxSize(),
                             colors = ButtonDefaults.buttonColors(
-                                contentColor = Color.Red,
-                                containerColor = Color.Transparent
+                                containerColor = Color.Transparent,
+                                contentColor = Color.White
                             ),
-                            onClick = { navController.navigate("RopaHombre") }
+                            onClick = { navController.navigate("Productos") }
                         ) {
                             Text(text = "ROPA MASCULINA")
                         }
@@ -182,16 +182,16 @@ fun Inicio(navController: NavController) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .border(2.dp, Color.Red)
+                        .border(1.dp, Color.White)
                 ) {
                     Button(
                         modifier = Modifier
                             .fillMaxSize(),
                         colors = ButtonDefaults.buttonColors(
-                            contentColor = Color.Red,
-                            containerColor = Color.Transparent
+                            containerColor = Color.Transparent,
+                            contentColor = Color.White
                         ),
-                        onClick = { navController.navigate("Accesorios") }
+                        onClick = { navController.navigate("Productos") }
                     ) {
                         Text(text = "ACCESORIOS")
                     }
