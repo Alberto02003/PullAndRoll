@@ -21,8 +21,6 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -32,22 +30,15 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
-import androidx.compose.ui.window.Popup
 import androidx.media3.common.MediaItem
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.datasource.RawResourceDataSource
@@ -80,60 +71,6 @@ fun Inicio(navController: NavController) {
 
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
-    var showMenu by remember { mutableStateOf(false) }
-
-    if (showMenu) {
-        val dismissMenu = { showMenu = false }
-        val menuItems = listOf(
-            "Inicio",
-            "Hombre",
-            "Mujer",
-            "Accesorios",
-            "Carrito",
-            "Sobre Nosotros"
-        )
-        Popup(onDismissRequest = dismissMenu) {
-            DropdownMenu(
-                expanded = true,
-                onDismissRequest = dismissMenu
-            ) {
-                menuItems.forEach { menuItem ->
-                    DropdownMenuItem(
-                        onClick = {
-                            dismissMenu()
-                            when (menuItem) {
-                                "Inicio" -> {
-                                    navController.navigate("Inicio")
-                                }
-                                "Hombre" -> {
-                                    navController.navigate("RopaHombre")
-                                }
-                                "Mujer" -> {
-                                    navController.navigate("RopaMujer")
-                                }
-                                "Accesorios" -> {
-                                    navController.navigate("Accesorios")
-                                }
-                                "Carrito" -> {
-                                    navController.navigate("Cuenta")
-                                }
-                                "Sobre Nosotros" -> {
-                                    navController.navigate("SobreNosotros")
-                                }
-                            }
-                        }
-                    ) {
-                        Text(
-                            text = menuItem,
-                            fontSize = 16.sp,
-                            modifier = Modifier.padding(vertical = 8.dp)
-                        )
-                    }
-                }
-            }
-        }
-    }
-
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
@@ -152,7 +89,7 @@ fun Inicio(navController: NavController) {
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = { showMenu = true }) {
+                    IconButton(onClick = {  }) {
                         Icon(
                             imageVector = Icons.Filled.Menu,
                             contentDescription = "Menu hamburguesa"
@@ -199,8 +136,23 @@ fun Inicio(navController: NavController) {
             LazyVerticalGrid(columns = GridCells.Adaptive(minSize = 128.dp)) {
 
             }
-            Column() {
-                Row() {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .border(2.dp, Color.Red)
+            ) {
+                Button(
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    colors = ButtonDefaults.buttonColors(
+                        contentColor = Color.Red,
+                        containerColor = Color.Transparent
+                    ),
+                    onClick = { navController.navigate("Ropa") }
+                ) {
+                    Text(text = "EMPEZAR")
+                }
+                /*Row() {
                     Column(
                         modifier = Modifier
                             .width(180.dp)
@@ -258,7 +210,7 @@ fun Inicio(navController: NavController) {
                     ) {
                         Text(text = "ACCESORIOS")
                     }
-                }
+                }*/
             }
         }
     }
