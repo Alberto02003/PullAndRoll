@@ -63,7 +63,14 @@ fun SobreNosotros(navController: NavController) {
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
-                    text = "We are a team of passionate individuals dedicated to bringing you the best products and services.",
+                    text = "\"Somos un equipo respaldado por una amplia experiencia en el" +
+                            " desarrollo y gestión de aplicaciones para comercio digital. Desde expertos en " +
+                            "diseño de interfaz hasta informaticos altamente capacitados, trabajamos en " +
+                            "sinergia para ofrecer una plataforma de compras en línea de primera clase. Nos dedicamos a " +
+                            "proporcionar una experiencia fluida y segura para nuestros usuarios, combinando habilidades " +
+                            "técnicas con una comprensión profunda de las tendencias del mercado y las necesidades de nuestros " +
+                            "clientes en el ámbito de la moda. Nuestro compromiso es ofrecer una experiencia de compra excepcional " +
+                            "que refleje nuestra pasión por la excelencia y la innovación en el comercio digital de moda.",
                     modifier = Modifier.width(300.dp)
                 )
                 Spacer(modifier = Modifier.height(16.dp))

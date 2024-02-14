@@ -1,6 +1,7 @@
 package com.example.pullandroll.pantallas
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -33,23 +34,16 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.pullandroll.R
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Productos(navController: NavController) {
-
-    /* val productos = listOf(
-         Producto("Camiseta", R.drawable.tshirt, 1, 20.0),
-         Producto("Pantalón", R.drawable.skirt, 2, 35.0),
-         Producto("Bufanda", R.drawable.earrings, 3, 15.0),
-     )
-     Carrito(navController = navController, productos = productos, onBuyClicked = {
-         // Acción al hacer clic en el botón de comprar
-     })*/
     var isDrawerOpen by remember { mutableStateOf(false) }
     val categories = listOf("Category 1", "Category 2", "Category 3", "Category 4", "Category 5")
 
@@ -61,18 +55,13 @@ fun Productos(navController: NavController) {
             TopAppBar(
                 title = { Text("NOT P&B") },
                 navigationIcon = {
-                    IconButton(onClick = {
-                        isDrawerOpen = true
-                    }) {
+                    IconButton(onClick = { isDrawerOpen = true }) {
                         Icon(Icons.Filled.Menu, contentDescription = "Menu")
                     }
                 },
                 actions = {
                     IconButton(onClick = { navController.navigate("Perfil") }) {
-                        Icon(
-                            imageVector = Icons.Filled.AccountCircle,
-                            contentDescription = "Perfil de usuario"
-                        )
+                        Icon(imageVector = Icons.Filled.AccountCircle, contentDescription = "Perfil de usuario")
                     }
                 }
             )
@@ -88,20 +77,13 @@ fun Productos(navController: NavController) {
                     )
                     DrawerContent(closeDrawer = { isDrawerOpen = false })
                 }
-                LazyColumn(
-                    modifier = Modifier.fillMaxSize()
-                ) {
+                LazyColumn(modifier = Modifier.fillMaxSize()) {
                     items(categories) { category ->
                         Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(vertical = 16.dp)
+                            modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp)
                         ) {
-                            Text(
-                                text = category,
-                                modifier = Modifier.padding(start = 16.dp)
-                            )
-                            HorizontalScrollBox(selectedItemIndex) { index ->
+                            Text(text = category, modifier = Modifier.padding(start = 16.dp))
+                            HorizontalScrollBox(category, selectedItemIndex) { index ->
                                 selectedItemIndex = index
                             }
                         }
@@ -113,31 +95,47 @@ fun Productos(navController: NavController) {
 }
 
 @Composable
-fun HorizontalScrollBox(selectedItemIndex: Int, onItemSelected: (Int) -> Unit) {
-    val items = listOf("Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7")
+fun HorizontalScrollBox(category: String, selectedItemIndex: Int, onItemSelected: (Int) -> Unit) {
+    val items = listOf(
+        "Item 1" to when (category) {
+            "Category 1" -> R.drawable.tshirt
+            "Category 2" -> R.drawable.skirt
+            "Category 3" -> R.drawable.earrings
+            else -> {}
+        },
+        "Item 2" to when (category) {
+            "Category 1" -> R.drawable.tshirt
+            "Category 2" -> R.drawable.skirt
+            "Category 3" -> R.drawable.earrings
+            else -> {}
+        },
+        // Add more items as needed with their corresponding images based on category
+    )
 
     LazyRow(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(200.dp)
-            .padding(top = 8.dp)
+        modifier = Modifier.fillMaxWidth().height(200.dp).padding(top = 8.dp)
     ) {
-        items.forEachIndexed { index, item ->
-            Surface(
+        items.forEachIndexed { index, (itemText, itemImage) ->
+            Box(
                 modifier = Modifier
                     .size(150.dp)
                     .padding(horizontal = 8.dp)
                     .background(if (index == selectedItemIndex) Color.Blue else Color.Gray)
-                    .clickable {
-                        onItemSelected(index)
-                    },
-                color = Color.Transparent
+                    .clickable { onItemSelected(index) }
             ) {
-                Text(
-                    text = item,
-                    color = Color.White,
-                    modifier = Modifier.align(Alignment.Center)
-                )
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center,
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    Image(
+                        painter = painterResource(itemImage),
+                        contentDescription = null, // Provide appropriate content description
+                        modifier = Modifier.size(72.dp) // Adjust the size as needed
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(text = itemText, color = Color.White)
+                }
             }
         }
     }
