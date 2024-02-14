@@ -1,4 +1,4 @@
-/*
+package com.example.pullandroll.pantallas/*
 package com.example.pullandroll.pantallas
 
 import android.annotation.SuppressLint
