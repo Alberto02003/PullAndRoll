@@ -67,9 +67,9 @@ fun Cuenta(navController: NavController) {
             )
         },
         content = {
-            Surface( // Agrega un Surface como contenedor principal
-                color = Color.Black, // Establece el color de fondo del Surface a negro
-                modifier = Modifier.fillMaxSize() // Asegúrate de que el Surface ocupe todo el espacio disponible
+            Surface(
+                color = Color.Black,
+                modifier = Modifier.fillMaxSize()
             ) {
                 Column(
                     modifier = Modifier

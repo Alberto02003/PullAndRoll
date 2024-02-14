@@ -67,24 +67,29 @@ fun Productos(navController: NavController) {
             )
         },
         content = {
-            Box(modifier = Modifier.fillMaxSize()) {
-                if (isDrawerOpen) {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(Color(0x99000000))
-                            .clickable { isDrawerOpen = false }
-                    )
-                    DrawerContent(closeDrawer = { isDrawerOpen = false })
-                }
-                LazyColumn(modifier = Modifier.fillMaxSize()) {
-                    items(categories) { category ->
-                        Column(
-                            modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp)
-                        ) {
-                            Text(text = category, modifier = Modifier.padding(start = 16.dp))
-                            HorizontalScrollBox(category, selectedItemIndex) { index ->
-                                selectedItemIndex = index
+            Surface( // Agrega un Surface como contenedor principal
+                color = Color.Black, // Establece el color de fondo del Surface a negro
+                modifier = Modifier.fillMaxSize() // Asegúrate de que el Surface ocupe todo el espacio disponible
+            ) {
+                Box(modifier = Modifier.fillMaxSize()) {
+                    if (isDrawerOpen) {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .background(Color(0x99000000))
+                                .clickable { isDrawerOpen = false }
+                        )
+                        DrawerContent(closeDrawer = { isDrawerOpen = false })
+                    }
+                    LazyColumn(modifier = Modifier.fillMaxSize()) {
+                        items(categories) { category ->
+                            Column(
+                                modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp)
+                            ) {
+                                Text(text = category, modifier = Modifier.padding(start = 16.dp))
+                                HorizontalScrollBox(category, selectedItemIndex) { index ->
+                                    selectedItemIndex = index
+                                }
                             }
                         }
                     }
