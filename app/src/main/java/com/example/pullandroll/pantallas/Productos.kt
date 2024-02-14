@@ -1,11 +1,20 @@
 package com.example.pullandroll.pantallas
-
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.material.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.unit.dp
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScopeInstance.align
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScopeInstance.align
+import androidx.compose.foundation.layout.RowScopeInstance.align
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -29,12 +38,15 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ComposableInferredTarget
+import androidx.compose.runtime.InternalComposeApi
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -52,6 +64,7 @@ import androidx.media3.exoplayer.ExoPlayer
 import androidx.navigation.NavController
 import com.example.pullandroll.R
 import com.example.pullandroll.objetos.Producto
+import androidx.compose.foundation.layout.Box as Box
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -70,6 +83,8 @@ fun Productos(navController: NavController) {
     var isDrawerOpen by remember { mutableStateOf(false) }
     val categories = listOf("Category 1", "Category 2", "Category 3", "Category 4", "Category 5")
 
+    var selectedItemIndex by remember { mutableStateOf(-1) }
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
@@ -85,7 +100,17 @@ fun Productos(navController: NavController) {
             )
         },
         content = {
+            // Main content of your app
             Box(modifier = Modifier.fillMaxSize()) {
+                if (isDrawerOpen) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(Color(0x99000000))
+                            .clickable { isDrawerOpen = false }
+                    )
+                    DrawerContent(closeDrawer = { isDrawerOpen = false })
+                }
                 LazyColumn(
                     modifier = Modifier.fillMaxSize()
                 ) {
@@ -99,20 +124,19 @@ fun Productos(navController: NavController) {
                                 text = category,
                                 modifier = Modifier.padding(start = 16.dp)
                             )
-                            HorizontalScrollBox()
+                            HorizontalScrollBox(selectedItemIndex) { index ->
+                                selectedItemIndex = index
+                            }
                         }
                     }
                 }
             }
         }
     )
-
 }
 
-
-
 @Composable
-fun HorizontalScrollBox() {
+fun HorizontalScrollBox(selectedItemIndex: Int, onItemSelected: (Int) -> Unit) {
     val items = listOf("Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7")
 
     LazyRow(
@@ -121,15 +145,19 @@ fun HorizontalScrollBox() {
             .height(200.dp)
             .padding(top = 8.dp)
     ) {
-        items(items.size) { index ->
-            Box(
+        items.forEachIndexed { index, item ->
+            Surface(
                 modifier = Modifier
                     .size(150.dp)
                     .padding(horizontal = 8.dp)
-                    .background(Color.Gray)
+                    .background(if (index == selectedItemIndex) Color.Blue else Color.Gray)
+                    .clickable {
+                        onItemSelected(index)
+                    },
+                color = Color.Transparent
             ) {
                 Text(
-                    text = items[index],
+                    text = item,
                     color = Color.White,
                     modifier = Modifier.align(Alignment.Center)
                 )
@@ -153,4 +181,3 @@ fun DrawerContent(closeDrawer: () -> Unit) {
         Text("Menu Item 3", modifier = Modifier.clickable { closeDrawer() })
     }
 }
-
