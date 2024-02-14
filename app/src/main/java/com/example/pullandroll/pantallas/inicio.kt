@@ -88,14 +88,14 @@ fun Inicio(navController: NavController) {
                         overflow = TextOverflow.Ellipsis
                     )
                 },
-                navigationIcon = {
+                /*navigationIcon = {
                     IconButton(onClick = {  }) {
                         Icon(
                             imageVector = Icons.Filled.Menu,
                             contentDescription = "Menu hamburguesa"
                         )
                     }
-                },
+                },*/
                 actions = {
                     IconButton(onClick = { navController.navigate("Cuenta") }) {
                         Icon(
