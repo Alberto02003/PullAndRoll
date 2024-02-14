@@ -1,6 +1,7 @@
 package com.example.pullandroll.pantallas
 
 import android.annotation.SuppressLint
+import android.content.ClipData.Item
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -19,6 +20,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -55,8 +57,8 @@ fun Productos(navController: NavController) {
             TopAppBar(
                 title = { Text("NOT P&B") },
                 navigationIcon = {
-                    IconButton(onClick = { isDrawerOpen = true }) {
-                        Icon(Icons.Filled.Menu, contentDescription = "Menu")
+                    IconButton(onClick = { navController.navigate("C")}) {
+                        Icon(Icons.Filled.ShoppingCart, contentDescription = "Carrito")
                     }
                 },
                 actions = {
@@ -64,6 +66,7 @@ fun Productos(navController: NavController) {
                         Icon(imageVector = Icons.Filled.AccountCircle, contentDescription = "Perfil de usuario")
                     }
                 }
+
             )
         },
         content = {
@@ -86,66 +89,44 @@ fun Productos(navController: NavController) {
                             Column(
                                 modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp)
                             ) {
-                                Text(text = category, modifier = Modifier.padding(start = 16.dp))
-                                HorizontalScrollBox(category, selectedItemIndex) { index ->
-                                    selectedItemIndex = index
+                                Text(text = category, modifier = Modifier.padding(start = 16.dp), color = Color.White)
+                                HorizontalScrollBox()
                                 }
                             }
                         }
                     }
                 }
-            }
+
         }
     )
 }
 
 @Composable
-fun HorizontalScrollBox(category: String, selectedItemIndex: Int, onItemSelected: (Int) -> Unit) {
-    val items = listOf(
-        "Item 1" to when (category) {
-            "Category 1" -> R.drawable.tshirt
-            "Category 2" -> R.drawable.skirt
-            "Category 3" -> R.drawable.earrings
-            else -> {}
-        },
-        "Item 2" to when (category) {
-            "Category 1" -> R.drawable.tshirt
-            "Category 2" -> R.drawable.skirt
-            "Category 3" -> R.drawable.earrings
-            else -> {}
-        },
-        // Add more items as needed with their corresponding images based on category
-    )
+fun HorizontalScrollBox() {
+    val items = listOf("Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7")
 
     LazyRow(
-        modifier = Modifier.fillMaxWidth().height(200.dp).padding(top = 8.dp)
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(300.dp)
+            .padding(top =90.dp)
     ) {
-        items.forEachIndexed { index, (itemText, itemImage) ->
+        items(items.size) { index ->
             Box(
                 modifier = Modifier
-                    .size(150.dp)
+                    .size(250.dp)
                     .padding(horizontal = 8.dp)
-                    .background(if (index == selectedItemIndex) Color.Blue else Color.Gray)
-                    .clickable { onItemSelected(index) }
+                    .background(Color.Gray)
             ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center,
-                    modifier = Modifier.fillMaxSize()
-                ) {
-                    Image(
-                        painter = painterResource(itemImage),
-                        contentDescription = null, // Provide appropriate content description
-                        modifier = Modifier.size(72.dp) // Adjust the size as needed
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(text = itemText, color = Color.White)
-                }
+                Text(
+                    text = items[index],
+                    color = Color.White,
+                    modifier = Modifier.align(Alignment.Center)
+                )
             }
         }
     }
 }
-
 @Composable
 fun DrawerContent(closeDrawer: () -> Unit) {
     Column(

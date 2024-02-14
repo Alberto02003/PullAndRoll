@@ -131,7 +131,7 @@ fun Cuenta(navController: NavController) {
                         Text(text = "Iniciar sesión")
                     }
                     Spacer(modifier = Modifier.height(16.dp))
-                    Text(text = "¿No tiene cuenta?")
+                    Text(text = "¿No tiene cuenta?", color = Color.White)
                     Button(onClick = {
                         navController.navigate("Registro")
                     }) {

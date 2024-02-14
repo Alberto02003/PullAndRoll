@@ -27,9 +27,9 @@ fun GrafoNavegacion(){
         composable(Rutas.Cuenta.ruta){
             Cuenta(navController = navController)
         }
-        /*composable(Rutas.Carrito.ruta){
+        composable(Rutas.Carrito.ruta){
             Carrito(navController = navController)
-        }*/
+        }
         composable(Rutas.Productos.ruta){
             Productos(navController = navController)
         }

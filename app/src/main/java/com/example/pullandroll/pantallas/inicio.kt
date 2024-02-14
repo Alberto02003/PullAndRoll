@@ -145,7 +145,7 @@ fun Inicio(navController: NavController) {
                         modifier = Modifier
                             .width(180.dp)
                             .height(530.dp)
-                            .border(1.dp, Color.White),
+                            ,
                         verticalArrangement = Arrangement.Top,
                         horizontalAlignment = Alignment.Start
                     ) {
@@ -165,7 +165,7 @@ fun Inicio(navController: NavController) {
                         modifier = Modifier
                             .width(180.dp)
                             .height(530.dp)
-                            .border(1.dp, Color.White),
+                            ,
                         horizontalAlignment = Alignment.End
                     ) {
                         Button(
@@ -185,7 +185,7 @@ fun Inicio(navController: NavController) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .border(1.dp, Color.White)
+
                 ) {
                     Button(
                         modifier = Modifier
