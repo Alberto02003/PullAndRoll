@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -31,10 +32,10 @@ fun Carrito(navController: NavController) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text("Carrito de Compra") },
+                title = { Text("Menu hamburguesa") },
                 actions = {
-                    IconButton(onClick = { /* acción al hacer clic */ }) {
-                        Icon(Icons.Filled.ShoppingCart, contentDescription = "Carrito de compra")
+                    IconButton(onClick = {  }) {
+                        Icon(Icons.Filled.Menu, contentDescription = "Menu hamburguesa")
                     }
                 }
             )

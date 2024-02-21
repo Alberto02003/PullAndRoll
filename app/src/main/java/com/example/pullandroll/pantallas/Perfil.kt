@@ -22,6 +22,7 @@ import com.example.pullandroll.R
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -42,7 +43,15 @@ fun Perfil(navController: NavController) {
             contraseña = "Software Engineer"
         )
         Spacer(modifier = Modifier.height(16.dp))
-        ChangePasswordButton(onClick = { /* Handle change password button click */ })
+        ChangePasswordButton(onClick = {  })
+        Button(
+            modifier = Modifier
+                .fillMaxSize(),
+            colors = ButtonDefaults.buttonColors(),
+            onClick = { navController.navigate("SobreNosotros") }
+        ) {
+            Text(text = "Sobre Nosotros")
+        }
     }
 }
 
