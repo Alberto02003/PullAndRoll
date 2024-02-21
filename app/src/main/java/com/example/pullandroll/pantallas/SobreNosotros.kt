@@ -39,9 +39,9 @@ fun SobreNosotros(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Registro") },
+                title = { Text("Sobre nosotros") },
                 navigationIcon = {
-                    IconButton(onClick = { navController.navigate("Cuenta") }) {
+                    IconButton(onClick = { navController.navigate("Perfil") }) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
                             contentDescription = "Ir atras"
@@ -59,7 +59,13 @@ fun SobreNosotros(navController: NavController) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "About Us",
+                    text = "Sobre NOT P&B"
+                )
+                Text(
+                    text = "Desarrolladores: Alberto Martín Morín y Daniel Palenzuela Álvarez 2 DAM B"
+                )
+                Text(
+                    text = "última versión más estable: 2.0 (2024)"
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(

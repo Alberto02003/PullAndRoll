@@ -45,8 +45,7 @@ fun Perfil(navController: NavController) {
         Spacer(modifier = Modifier.height(16.dp))
         ChangePasswordButton(onClick = {  })
         Button(
-            modifier = Modifier
-                .fillMaxSize(),
+            horizontalAlignment = Alignment.BottomCenter,
             colors = ButtonDefaults.buttonColors(),
             onClick = { navController.navigate("SobreNosotros") }
         ) {
