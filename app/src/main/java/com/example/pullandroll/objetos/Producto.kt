@@ -1,8 +1,9 @@
 package com.example.pullandroll.objetos
 
-data class Producto(
-    val nombre: String,
-    val imagenResId: Int,
-    val cantidad: Int,
-    val precio: Double
-)
+data class Datos(
+    var Nombre: String="",
+    var Precio:String ="",
+    var Imagen:String = ""
+){
+   var idDatos: String = ""
+}

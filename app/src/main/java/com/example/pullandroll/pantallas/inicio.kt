@@ -62,14 +62,17 @@ fun Inicio(navController: NavController) {
 
     exoPlayer.playWhenReady = true
     exoPlayer.repeatMode = ExoPlayer.REPEAT_MODE_ALL
+    exoPlayer.volume = Float.MIN_VALUE
 
     val uri = RawResourceDataSource.buildRawResourceUri(R.raw.fondo)
     val mediaItem = remember {
         MediaItem.Builder()
             .setUri(uri)
             .build()
+
     }
     exoPlayer.setMediaItem(mediaItem)
+
     exoPlayer.prepare()
 
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())

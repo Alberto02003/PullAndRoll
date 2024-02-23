@@ -39,11 +39,10 @@ fun Perfil(navController: NavController) {
         ProfileImage()
         Spacer(modifier = Modifier.height(16.dp))
         ProfileInfo(
-            correo = "Alberto el puto",
-            contraseña = "Software Engineer"
+            correo = "pato",
+            contraseña = "pata"
         )
         Spacer(modifier = Modifier.height(16.dp))
-        ChangePasswordButton(onClick = {  })
         Button(
             colors = ButtonDefaults.buttonColors(),
             onClick = { navController.navigate("SobreNosotros") }
@@ -83,9 +82,3 @@ fun ProfileInfo( correo: String, contraseña: String) {
     )
 }
 
-@Composable
-fun ChangePasswordButton(onClick: () -> Unit) {
-    Button(onClick = onClick) {
-        Text(text = "Cambiar Contraseña")
-    }
-}

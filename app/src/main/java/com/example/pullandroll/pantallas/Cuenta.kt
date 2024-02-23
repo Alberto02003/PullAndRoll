@@ -124,8 +124,8 @@ fun Cuenta(navController: NavController, viewModel: LoginModel = androidx.lifecy
                     )
                     Spacer(modifier = Modifier.height(16.dp))
                     Button(onClick = {
-                            viewModel.singIn(navController,email, password){
-                                navController.navigate("Productos")
+                            viewModel.singIn(email, password){
+                                navController.navigate("Perfil")
                             }
                     }) {
                         Text(text = "Iniciar sesión")

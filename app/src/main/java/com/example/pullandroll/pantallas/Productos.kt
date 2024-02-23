@@ -1,11 +1,14 @@
 package com.example.pullandroll.pantallas
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,9 +18,12 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -32,9 +38,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.pullandroll.R
 import com.example.pullandroll.viewmodel.LoginModel
 
 
@@ -48,6 +57,7 @@ fun Productos(navController: NavController, viewModel: LoginModel = androidx.lif
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
@@ -60,9 +70,7 @@ fun Productos(navController: NavController, viewModel: LoginModel = androidx.lif
                 },
                 actions = {
                     IconButton(onClick = {
-                            viewModel.singIn(navController,email, password){
-                                navController.navigate("Perfil")
-                            }
+                                navController.navigate("Cuenta")
                     }) {
                         Icon(imageVector = Icons.Filled.AccountCircle, contentDescription = "Perfil de usuario")
                     }
@@ -107,7 +115,7 @@ fun Productos(navController: NavController, viewModel: LoginModel = androidx.lif
 @Composable
 fun HorizontalScrollBox() {
     val items = listOf("Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7")
-
+    var expanded by remember { mutableStateOf(false) }
     LazyRow(
         modifier = Modifier
             .fillMaxWidth()
@@ -121,15 +129,63 @@ fun HorizontalScrollBox() {
                     .padding(horizontal = 8.dp)
                     .background(Color.Gray)
             ) {
-                Text(
-                    text = items[index],
-                    color = Color.White,
-                    modifier = Modifier.align(Alignment.Center)
-                )
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+
+                    Image(
+                        painter = painterResource(id = R.drawable.tshirt),
+                        contentDescription = "Foto",
+                        modifier = Modifier
+                            .size(100.dp)
+                            .clip(RoundedCornerShape(8.dp))
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 16.dp),
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        var selectedSize by remember { mutableStateOf("") }
+                        DropdownMenu(
+                            expanded = expanded,
+                            onDismissRequest = { expanded = false},
+                            modifier = Modifier.padding(horizontal = 16.dp)
+                        ) {
+                            DropdownMenuItem(text = { selectedSize = "S" }, onClick = {
+                                expanded = false
+                            })
+                            DropdownMenuItem(text = { selectedSize = "M" }, onClick = {
+                                expanded = false
+                            })
+                            DropdownMenuItem(text = { selectedSize = "L" }, onClick = {
+                                expanded = false
+                            })
+                        }
+                        Box(
+                            modifier = Modifier
+                                .padding(8.dp)
+                        ) {
+                            Text(
+                                text = if (selectedSize.isNotBlank()) selectedSize else "Seleccionar talla",
+                                modifier = Modifier.clickable(onClick = { }),
+                            )
+                        }
+                    }
+                }
             }
         }
     }
 }
+
 @Composable
 fun DrawerContent(closeDrawer: () -> Unit) {
     Column(
@@ -145,3 +201,5 @@ fun DrawerContent(closeDrawer: () -> Unit) {
         Text("Menu Item 3", modifier = Modifier.clickable { closeDrawer() })
     }
 }
+
+

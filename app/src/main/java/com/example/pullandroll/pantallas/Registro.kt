@@ -118,7 +118,7 @@ fun Registro(navController: NavController, viewModel: LoginModel = androidx.life
                     Spacer(modifier = Modifier.height(16.dp))
                     Button(onClick = {
                         viewModel.register(email, password){
-                            navController.navigate("Productos")
+                            navController.navigate("Perfil")
                         }
                     }) {
                         Text(text = "Registrarse")
