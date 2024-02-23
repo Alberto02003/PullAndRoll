@@ -1,8 +1,6 @@
 package com.example.pullandroll.pantallas
 
 import android.annotation.SuppressLint
-import android.content.ClipData.Item
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -19,7 +17,6 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -36,20 +33,20 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.pullandroll.R
+import com.example.pullandroll.viewmodel.LoginModel
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Productos(navController: NavController) {
+fun Productos(navController: NavController, viewModel: LoginModel = androidx.lifecycle.viewmodel.compose.viewModel()) {
     var isDrawerOpen by remember { mutableStateOf(false) }
     val categories = listOf("Category 1", "Category 2", "Category 3", "Category 4", "Category 5")
-
     var selectedItemIndex by remember { mutableStateOf(-1) }
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -62,7 +59,11 @@ fun Productos(navController: NavController) {
                     }
                 },
                 actions = {
-                    IconButton(onClick = { navController.navigate("Perfil") }) {
+                    IconButton(onClick = {
+                            viewModel.singIn(navController,email, password){
+                                navController.navigate("Perfil")
+                            }
+                    }) {
                         Icon(imageVector = Icons.Filled.AccountCircle, contentDescription = "Perfil de usuario")
                     }
                 }
@@ -87,7 +88,9 @@ fun Productos(navController: NavController) {
                     LazyColumn(modifier = Modifier.fillMaxSize()) {
                         items(categories) { category ->
                             Column(
-                                modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp)
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(vertical = 16.dp)
                             ) {
                                 Text(text = category, modifier = Modifier.padding(start = 16.dp), color = Color.White)
                                 HorizontalScrollBox()
@@ -109,7 +112,7 @@ fun HorizontalScrollBox() {
         modifier = Modifier
             .fillMaxWidth()
             .height(300.dp)
-            .padding(top =90.dp)
+            .padding(top = 90.dp)
     ) {
         items(items.size) { index ->
             Box(

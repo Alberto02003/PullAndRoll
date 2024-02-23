@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
+import com.example.pullandroll.viewmodel.LoginModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -38,14 +39,12 @@ fun Perfil(navController: NavController) {
         ProfileImage()
         Spacer(modifier = Modifier.height(16.dp))
         ProfileInfo(
-            name = "John Doe",
             correo = "Alberto el puto",
             contraseña = "Software Engineer"
         )
         Spacer(modifier = Modifier.height(16.dp))
         ChangePasswordButton(onClick = {  })
         Button(
-            horizontalAlignment = Alignment.BottomCenter,
             colors = ButtonDefaults.buttonColors(),
             onClick = { navController.navigate("SobreNosotros") }
         ) {
@@ -69,24 +68,18 @@ fun ProfileImage() {
 }
 
 @Composable
-fun ProfileInfo(name: String, correo: String, contraseña: String) {
-    Text(
-        text = name,
-        fontSize = 24.sp,
-        fontWeight = FontWeight.Bold,
-        color = Color.White
-    )
+fun ProfileInfo( correo: String, contraseña: String) {
     Spacer(modifier = Modifier.height(4.dp))
     Text(
         text = "Correo: $correo",
         fontSize = 16.sp,
-        color = Color.Gray
+        color = Color.Black
     )
     Spacer(modifier = Modifier.height(4.dp))
     Text(
         text = "Contraseña: $contraseña",
         fontSize = 16.sp,
-        color = Color.Gray
+        color = Color.Black
     )
 }
 

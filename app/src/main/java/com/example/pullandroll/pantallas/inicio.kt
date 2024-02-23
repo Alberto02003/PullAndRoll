@@ -91,14 +91,6 @@ fun Inicio(navController: NavController) {
                         modifier = Modifier.size(100.dp)
                     )
                 },
-                /*navigationIcon = {
-                    IconButton(onClick = {  }) {
-                        Icon(
-                            imageVector = Icons.Filled.Menu,
-                            contentDescription = "Menu hamburguesa"
-                        )
-                    }
-                },*/
                 actions = {
                     IconButton(onClick = { navController.navigate("Cuenta") }) {
                         Icon(
@@ -122,11 +114,7 @@ fun Inicio(navController: NavController) {
             repeat(50) {
                 Text(it.toString())
             }
-
-            //innerPadding ->
-            //ScrollContent(innerPadding)
         }
-
         Box(modifier = Modifier.fillMaxSize()) {
             AndroidView(factory = {
                 PlayerView(it).apply {
@@ -135,69 +123,24 @@ fun Inicio(navController: NavController) {
                     resizeMode = AspectRatioFrameLayout.RESIZE_MODE_ZOOM
                 }
             })
-
-            LazyVerticalGrid(columns = GridCells.Adaptive(minSize = 128.dp)) {
-
-            }
-            Column() {
-                Row() {
-                    Column(
-                        modifier = Modifier
-                            .width(180.dp)
-                            .height(530.dp)
-                            ,
-                        verticalArrangement = Arrangement.Top,
-                        horizontalAlignment = Alignment.Start
-                    ) {
-                        Button(
-                            modifier = Modifier
-                                .fillMaxSize(),
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = Color.Transparent,
-                                contentColor = Color.White
-                            ),
-                            onClick = { navController.navigate("Productos") }
-                        ) {
-                            Text(text = "ROPA FEMENINA")
-                        }
-                    }
-                    Column(
-                        modifier = Modifier
-                            .width(180.dp)
-                            .height(530.dp)
-                            ,
-                        horizontalAlignment = Alignment.End
-                    ) {
-                        Button(
-                            modifier = Modifier
-                                .fillMaxSize(),
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = Color.Transparent,
-                                contentColor = Color.White
-                            ),
-                            onClick = { navController.navigate("Productos") }
-                        ) {
-                            Text(text = "ROPA MASCULINA")
-                        }
-                    }
-                }
-
-                Row(
+            Column(
+                modifier = Modifier
+                    .width(580.dp)
+                    .height(730.dp)
+                ,
+                verticalArrangement = Arrangement.Top,
+                horizontalAlignment = Alignment.Start
+            ) {
+                Button(
                     modifier = Modifier
-                        .fillMaxWidth()
-
+                        .fillMaxSize(),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color.Transparent,
+                        contentColor = Color.White
+                    ),
+                    onClick = { navController.navigate("Productos") }
                 ) {
-                    Button(
-                        modifier = Modifier
-                            .fillMaxSize(),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color.Transparent,
-                            contentColor = Color.White
-                        ),
-                        onClick = { navController.navigate("Productos") }
-                    ) {
-                        Text(text = "ACCESORIOS")
-                    }
+                    Text(text = "Entrar")
                 }
             }
         }

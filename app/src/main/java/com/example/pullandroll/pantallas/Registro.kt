@@ -35,11 +35,12 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.pullandroll.R
 import com.example.pullandroll.Rutas.Rutas
+import com.example.pullandroll.viewmodel.LoginModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
-fun Registro(navController: NavController) {
+fun Registro(navController: NavController, viewModel: LoginModel = androidx.lifecycle.viewmodel.compose.viewModel()) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
@@ -115,24 +116,10 @@ fun Registro(navController: NavController) {
                         modifier = Modifier.fillMaxWidth()
                     )
                     Spacer(modifier = Modifier.height(16.dp))
-                    OutlinedTextField(
-                        value = confirmPassword,
-                        onValueChange = { confirmPassword = it },
-                        label = { Text("Confirmar la contraseña") },
-                        singleLine = true,
-                        keyboardOptions = KeyboardOptions(
-                            keyboardType = KeyboardType.Password,
-                            imeAction = ImeAction.Done
-                        ),
-                        keyboardActions = KeyboardActions(
-                            onDone = {
-                                keyboardController?.hide()
-                            }
-                        ),
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
                     Button(onClick = {
+                        viewModel.register(email, password){
+                            navController.navigate("Productos")
+                        }
                     }) {
                         Text(text = "Registrarse")
                     }

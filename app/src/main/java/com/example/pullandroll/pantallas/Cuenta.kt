@@ -14,13 +14,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -38,16 +36,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.semantics.SemanticsProperties.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.pullandroll.R
+import com.example.pullandroll.viewmodel.LoginModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
-fun Cuenta(navController: NavController) {
+fun Cuenta(navController: NavController, viewModel: LoginModel = androidx.lifecycle.viewmodel.compose.viewModel()) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     val context = LocalContext.current
@@ -126,7 +124,9 @@ fun Cuenta(navController: NavController) {
                     )
                     Spacer(modifier = Modifier.height(16.dp))
                     Button(onClick = {
-
+                            viewModel.singIn(navController,email, password){
+                                navController.navigate("Productos")
+                            }
                     }) {
                         Text(text = "Iniciar sesión")
                     }
@@ -136,9 +136,12 @@ fun Cuenta(navController: NavController) {
                         navController.navigate("Registro")
                     }) {
                         Text(text = "Crearme una cuenta")
+
                     }
                 }
             }
         }
     )
+
+
 }
